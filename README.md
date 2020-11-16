@@ -1,11 +1,20 @@
 Лабораторна робота №4
 
 Дана лабораторна робота була створена у середовищі PyCharm.
-Використовуючи інструмент pyenv версії 2.64.3 був інстальований інтерпретатор Python 3.7.0. Також за допомогою наступних команд:
+Використовуючи інструмент pyenv версії 2.64.3 був інстальований інтерпретатор Python 3.7.0.  У випадку, якщо pyenv та Python у вас не інстальовані, необхідно:
+
+- відкрити командний рядок Windows (наприклад ви можете нажати комбінацію клавіш Windows+R, вести рядок 'cmd' і нажати Enter) і ввести команду 
+  pip install pyenv-win --target "%USERPROFILE%.pyenv"
+- відкрити PowerShell і ввести наступні команди 
+  [System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + ".pyenv\pyenv-win","User") 
+  [System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + ".pyenv\pyenv-win","User")
+- відкрити командний рядок Windows i ввести команду: pyenv install 3.7.0
+
+Також за допомогою наступних команд:
 - pip install flask
 - pip install gevent
 
-Були інстальовані фреймворк Flask, та WSGI-серевер Gevent. 
+були інстальовані фреймворк Flask, та WSGI-серевер Gevent. 
 Окрім того (за допомогою команд 'virtualenv --python шлях_до_системного_інтерпретатора venv' та 'шлях_до_пточного_проекту/venv/Scripts/activate.bat') було створене віртуальне середовище для проекту.
 
 Для того щоб клонувати даний репозиторій і запустити його в себе на комп’ютері, вам необхідно мати встановлений Git.
