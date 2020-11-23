@@ -38,6 +38,9 @@ paths:
               $ref: '#/components/schemas/Article'
         required: true
       responses:
+        200:
+          description: successful operation
+          content: {}
         405:
           description: Invalid input
           content: {}
@@ -62,8 +65,8 @@ paths:
               $ref: '#/components/schemas/Article'
         required: true
       responses:
-        400:
-          description: Invalid ID supplied
+        200:
+          description:  successful operation
           content: {}
         404:
           description: Article not found
@@ -76,7 +79,7 @@ paths:
         - moderator
         - user
       x-codegen-request-body-name: body
-  /article/confirmchanges:
+  /article/confirm_:
     put:
       tags:
       - article
@@ -93,8 +96,8 @@ paths:
               $ref: '#/components/schemas/Article'
         required: true
       responses:
-        400:
-          description: Invalid ID supplied
+        200:
+          description:  successful operation
           content: {}
         404:
           description: Article not found
@@ -156,6 +159,9 @@ paths:
           type: integer
           format: int64
       responses:
+        200:
+          description: successful operation
+          content: {}
         400:
           description: Invalid ID supplied
           content: {}
@@ -209,24 +215,7 @@ paths:
       responses:
         200:
           description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
-          content:
-            application/xml:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
+          content: {}
         400:
           description: Invalid username/password supplied
           content: {}
@@ -290,8 +279,11 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       responses:
+        200:
+          description: successful operation
+          content: {}
         400:
-          description: Invalid user supplied
+          description: Invalid username supplied
           content: {}
         404:
           description: User not found
@@ -313,6 +305,9 @@ paths:
         schema:
           type: string
       responses:
+        200:
+          description: successful operation
+          content: {}
         400:
           description: Invalid username supplied
           content: {}
@@ -460,16 +455,6 @@ components:
           - moderator
       xml:
         name: User
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
   securitySchemes:
     blog_auth:
       type: oauth2
