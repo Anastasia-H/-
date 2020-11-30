@@ -42,6 +42,7 @@ OpenAPI специфікації досить великі за ромізром
 - ID статті
 - назва статті
 - текст статті
+- дата публікації
 - стан статті (на редагуванні/опублікована/в очікуванні на схвалення)
 
 КОРИСТУВАЧ
@@ -56,9 +57,12 @@ OpenAPI специфікації досить великі за ромізром
 
 СТАТТІ КОРИСТУВАЧІВ
 
-- ID користувача
+- ID версії статті
+- ID користувача, що редагував
+- ID модератора
 - ID статті
 - відредагований текст
+- дата редагування
 
 Читати статті зможуть усі користувачі, натомість створювати і редагувати - лише зареєстровані.
 Якщо користувач відредагував статтю, то вона переходить у стан очікування схвалення змін модератором, лише модератор може 
@@ -89,3 +93,9 @@ BLOG
 - GET /blog (shows the list of articles)
 - GET /blog/{username} (shows the list of articles of the user)
 - GET /blog/{article_ID} (shows the history of the article)
+
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger1.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger2.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger3.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger4.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger5.png)
