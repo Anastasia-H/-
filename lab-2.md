@@ -94,4 +94,8 @@ BLOG
 - GET /blog/{username} (shows the list of articles of the user)
 - GET /blog/{article_ID} (shows the history of the article)
 
-![Image alt](https://github.com/Anastasia-H/PP/blob/lab-3/diagram.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger1.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger2.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger3.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger4.png)
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-2/swagger%20screens/swagger5.png)
