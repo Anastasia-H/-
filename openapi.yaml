@@ -416,6 +416,8 @@ components:
           type: string
         text:
           type: string
+        publication_date:
+          type: integer
         status:
           type: string
           description: Article Status
@@ -423,9 +425,6 @@ components:
           - published
           - editting
           - consideration
-        complete:
-          type: boolean
-          default: false
       xml:
         name: Article
     User:
@@ -455,10 +454,13 @@ components:
     UsersArticles:
       type: object
       properties:
-        id:
+        version_id:
           type: integer
           format: int64
         user_ID:
+          type: integer
+          format: int64
+        moderator_ID:
           type: integer
           format: int64
         article_ID:
@@ -466,6 +468,8 @@ components:
           format: int64
         edited_text:
           type: string
+        editing_date:
+          type: integer
       xml:
         name: UsersArticles
   securitySchemes:
