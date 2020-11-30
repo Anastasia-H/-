@@ -93,3 +93,5 @@ BLOG
 - GET /blog (shows the list of articles)
 - GET /blog/{username} (shows the list of articles of the user)
 - GET /blog/{article_ID} (shows the history of the article)
+
+![Image alt](https://github.com/Anastasia-H/PP/blob/lab-3/diagram.png)
