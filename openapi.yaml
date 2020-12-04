@@ -334,10 +334,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/UsersArticles'
+                $ref: '#/components/schemas/Article'
             application/json:
               schema:
-                $ref: '#/components/schemas/UsersArticles'
+                $ref: '#/components/schemas/Article'
   /blog/{username}:
     get:
       tags:
@@ -357,10 +357,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/UsersArticles'
+                $ref: '#/components/schemas/Article'
             application/json:
               schema:
-                $ref: '#/components/schemas/UsersArticles'
+                $ref: '#/components/schemas/Article'
         400:
           description: Invalid username supplied
           content: {}
@@ -387,10 +387,10 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/UsersArticles'
+                $ref: '#/components/schemas/Article'
             application/json:
               schema:
-                $ref: '#/components/schemas/UsersArticles'
+                $ref: '#/components/schemas/Article'
         400:
           description: Invalid article_ID supplied
           content: {}
@@ -409,6 +409,9 @@ components:
         - title
         - text
       properties:
+        id:
+          type: integer
+          format: int64
         article_ID:
           type: integer
           format: int64
@@ -416,8 +419,6 @@ components:
           type: string
         text:
           type: string
-        publication_date:
-          type: integer
         status:
           type: string
           description: Article Status
@@ -425,12 +426,15 @@ components:
           - published
           - editting
           - consideration
+        complete:
+          type: boolean
+          default: false
       xml:
         name: Article
     User:
       type: object
       properties:
-        user_ID:
+        id:
           type: integer
           format: int64
         username:
@@ -451,27 +455,6 @@ components:
           - moderator
       xml:
         name: User
-    UsersArticles:
-      type: object
-      properties:
-        version_id:
-          type: integer
-          format: int64
-        user_ID:
-          type: integer
-          format: int64
-        moderator_ID:
-          type: integer
-          format: int64
-        article_ID:
-          type: integer
-          format: int64
-        edited_text:
-          type: string
-        editing_date:
-          type: integer
-      xml:
-        name: UsersArticles
   securitySchemes:
     blog_auth:
       type: oauth2

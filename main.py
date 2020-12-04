@@ -1,6 +1,5 @@
 from gevent.pywsgi import WSGIServer
-from flask import Flask
-app = Flask(__name__)
+from app import app
 
 @app.route('/api/v1/hello-world-5')
 def hello_world():
