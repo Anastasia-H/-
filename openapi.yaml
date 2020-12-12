@@ -49,10 +49,10 @@ paths:
         - moderator
         - user
       x-codegen-request-body-name: body
-    put:
+    get:
       tags:
       - article
-      summary: Updates the article
+      summary: Information about all articles
       operationId: uodateArticle
       requestBody:
         description: Article object that needs to be added
@@ -69,7 +69,7 @@ paths:
           description:  successful operation
           content: {}
         404:
-          description: Article not found
+          description: Articles not found
           content: {}
         405:
           description: Validation exception
@@ -78,36 +78,6 @@ paths:
       - blog_auth:
         - moderator
         - user
-      x-codegen-request-body-name: body
-  /article/confirm_:
-    put:
-      tags:
-      - article
-      summary: Updates the article
-      operationId: confirmChangeedArticle
-      requestBody:
-        description: Article object that needs to be added
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Article'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Article'
-        required: true
-      responses:
-        200:
-          description:  successful operation
-          content: {}
-        404:
-          description: Article not found
-          content: {}
-        405:
-          description: Validation exception
-          content: {}
-      security:
-      - blog_auth:
-        - moderator
       x-codegen-request-body-name: body
   /article/{article_ID}:
     get:
@@ -140,7 +110,6 @@ paths:
         404:
           description: Articlenot found
           content: {}
-
     delete:
       tags:
       - article
@@ -171,11 +140,35 @@ paths:
       security:
       - blog_auth:
         - moderator
-
-
-
-
-
+    put:
+      tags:
+        - article
+      summary: Updates the article
+      operationId: confirmChangeedArticle
+      requestBody:
+        description: Article object that needs to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Article'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content: { }
+        404:
+          description: Article not found
+          content: { }
+        405:
+          description: Validation exception
+          content: { }
+      security:
+        - blog_auth:
+            - moderator
+      x-codegen-request-body-name: body
 
   /user:
     post:
@@ -195,6 +188,93 @@ paths:
           description: successful operation
           content: {}
       x-codegen-request-body-name: body
+  /user/{username}:
+    get:
+      tags:
+        - user
+      summary: Shows the user
+      operationId: showUser
+      parameters:
+        - name: username
+          in: path
+          description: 'The name that needs to be fetched'
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Invalid username supplied
+          content: { }
+        404:
+          description: User not found
+          content: { }
+    put:
+      tags:
+        - user
+      summary: Updates the user
+      description: This can only be done by the logged in user
+      operationId: updateUser
+      parameters:
+        - name: username
+          in: path
+          description: name that need to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated user object
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: successful operation
+          content: { }
+        400:
+          description: Invalid username supplied
+          content: { }
+        404:
+          description: User not found
+          content: { }
+      security:
+        - api_key: [ ]
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - user
+      summary: Deletes user
+      description: This can only be done by the logged in user
+      operationId: deleteUser
+      parameters:
+        - name: username
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: successful operation
+          content: { }
+        400:
+          description: Invalid username supplied
+          content: { }
+        404:
+          description: User not found
+          content: { }
+      security:
+        - api_key: [ ]
   /user/login:
     get:
       tags:
@@ -229,96 +309,6 @@ paths:
         default:
           description: successful operation
           content: {}
-  /user/{username}:
-    get:
-      tags:
-      - user
-      summary: Shows the user
-      operationId: showUser
-      parameters:
-      - name: username
-        in: path
-        description: 'The name that needs to be fetched'
-        required: true
-        schema:
-          type: string
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        400:
-          description: Invalid username supplied
-          content: {}
-        404:
-          description: User not found
-          content: {}
-    put:
-      tags:
-      - user
-      summary: Updates the user
-      description: This can only be done by the logged in user
-      operationId: updateUser
-      parameters:
-      - name: username
-        in: path
-        description: name that need to be updated
-        required: true
-        schema:
-          type: string
-      requestBody:
-        description: Updated user object
-        content:
-          '*/*':
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      responses:
-        200:
-          description: successful operation
-          content: {}
-        400:
-          description: Invalid username supplied
-          content: {}
-        404:
-          description: User not found
-          content: {}
-      security:
-        - api_key: []
-      x-codegen-request-body-name: body
-    delete:
-      tags:
-      - user
-      summary: Deletes user
-      description: This can only be done by the logged in user
-      operationId: deleteUser
-      parameters:
-      - name: username
-        in: path
-        description: The name that needs to be deleted
-        required: true
-        schema:
-          type: string
-      responses:
-        200:
-          description: successful operation
-          content: {}
-        400:
-          description: Invalid username supplied
-          content: {}
-        404:
-          description: User not found
-          content: {}
-      security:
-        - api_key: []
-
-
-
 
 
   /blog:
