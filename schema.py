@@ -7,11 +7,9 @@ ma = Marshmallow(app)
 
 
 class ArticleSchema(ma.Schema):
-    article_ID = fields.Integer(required=True)
     title = fields.String(required=True)
     text = fields.String(required=True)
-    status = fields.String(required=True)
-    user_ID = fields.Integer(required=True)
+    author_id = fields.Integer(required=True)
 
 
 class UserSchema(ma.Schema):
