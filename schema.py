@@ -7,11 +7,9 @@ ma = Marshmallow(app)
 
 
 class ArticleSchema(ma.Schema):
-    article_ID = fields.Integer(required=True)
     title = fields.String(required=True)
     text = fields.String(required=True)
-    status = fields.String(required=True)
-    user_ID = fields.Integer(required=True)
+    author_id = fields.Integer(required=True)
 
 
 class UserSchema(ma.Schema):
@@ -19,7 +17,8 @@ class UserSchema(ma.Schema):
     lastName = fields.String(required=True)
     username = fields.String(required=True)
     email = fields.String(required=True, validate=validate.Email())
-    password = fields.Function(deserialize=lambda obj: generate_password_hash(obj), load_only=True)
+    #password = fields.Function(deserialize=lambda obj: generate_password_hash(obj), load_only=True)
+    password = fields.String(required=True)
 
 
 class UserArticleSchema(ma.Schema):
