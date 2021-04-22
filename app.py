@@ -6,6 +6,12 @@ from flask import request, jsonify
 from flask import abort
 from marshmallow import ValidationError
 from flask_bcrypt import Bcrypt
+import base64
+import datetime
+import getpass
+
+from flask_httpauth import HTTPBasicAuth
+auth = HTTPBasicAuth()
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
@@ -16,94 +22,36 @@ user_articles_schema = UserArticleSchema(many=True)
 bcrypt = Bcrypt()
 
 
-@app.errorhandler(404)
-def error_404(e):
-    return jsonify(error=str(e)), 404
+@auth.verify_password
+def verify(username, password):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(401, description="UnauthorizedError")
+    if not bcrypt.check_password_hash(user.password, password):
+        abort(401, description="UnauthorizedError")
+    return True
 
 
-@app.errorhandler(400)
-def error_400(e):
-    return jsonify(error=str(e)), 400
+@app.route('/user/login', methods=['GET'])
+@auth.login_required()
+def user_login():
+    return jsonify(message="You are logged in", status=200)
 
 
-@app.route('/article', methods=['POST', 'GET'])
-def article():
-    if request.method == 'POST':
-        article_data = request.agrs
-        title = article_data.get('title')
-        text = article_data.get('text')
-        author = article_data.get('author')
-
-        try:
-            ArticleSchema().load(article_data)
-        except ValidationError:
-            abort(400, description="Error validation")
-
-        new_article = Article(title, text, author)
-
-        db.session.add(new_article)
-        db.session.commit()
-
-        version = UsersArticles(text, author, author, new_article.article_ID)
-
-        db.session.add(version)
-        db.session.commit()
-
-        return jsonify(ArticleSchema().dump(new_article))
-
-    elif request.method == 'GET':
-        all_articles = Article.query.all()
-        if all_articles is None:
-            abort(404, description="Resource not found")
-        result = articles_schema.dump(all_articles)
-        return jsonify(result)
+#перевірка чи є залогінений юзер модератором
+def chek_moderator():
+    #curr_username = getpass.getuser() # =Настя
+    curr_username = auth.current_user()
+    user = User.query.filter_by(username=curr_username).first()
+    if user.moderator == False:
+        return False
+    return True
 
 
-@app.route('/article/<int:ids>', methods=['GET', 'PUT', 'DELETE'])
-def article_id(ids):
-    if request.method == 'GET':
-        articles = Article.query.get(ids)
-        if articles is None:
-            abort(404, description="Resource not found")
-        return jsonify(ArticleSchema().dump(articles))
-
-    elif request.method == 'PUT':
-        articles = Article.query.get(ids)
-        if articles is None:
-            abort(404, description="Resource not found")
-
-        article_data = request.args
-        text = article_data.get('text')
-        user = article_data.get('editor')
-        author = articles.user_ID
-
-        if user == author:
-            articles.text = text
-            db.session.commit()
-        else:
-            articles.status = "wait for moderator"
-
-        version = UsersArticles(text, user, author, articles.article_ID)
-
-        db.session.add(version)
-        db.session.commit()
-
-        return article_schema.jsonify(articles)
-
-    elif request.method == 'DELETE':
-        articles = Article.query.get(ids)
-        if articles is None:
-            abort(404, description="Resource not found")
-        db.session.delete(articles)
-        db.session.commit()
-
-        all_articles = Article.query.all()
-        result = articles_schema.dump(all_articles)
-        return jsonify(result)
-
-
-@app.route('/user', methods=['POST', 'GET'])
-def users():
+#створення юзера
+#http://localhost:5000/user?username=nh&firstName=nastia&lastName=hudyma&email=nh@ex.com&password=password
+@app.route('/user', methods=['POST'])
+def create_user():
     if request.method == 'POST':
         user_data = request.args
 
@@ -126,15 +74,21 @@ def users():
 
         return jsonify(UserSchema().dump(new_user))
 
-    elif request.method == 'GET':
-        all_users = User.query.all()
-        if all_users is None:
-            abort(404, description="Resource not found")
-        result = users_schema.dump(all_users)
-        return jsonify(result)
+
+#відображення всіх юзерів
+#http://localhost:5000/users
+@app.route('/users', methods=['GET'])
+def users():
+    all_users = User.query.all()
+    if all_users is None:
+        abort(404, description="Resource not found")
+    result = users_schema.dump(all_users)
+    return jsonify(result)
 
 
-@app.route('/user/<username>', methods=['GET', 'PUT', 'DELETE'])
+#відображення юзера
+#http://localhost:5000/user/testuser
+@app.route('/user/<username>', methods=['GET'])
 def user_username(username):
     if request.method == 'GET':
         user = User.query.filter_by(username=username).first()
@@ -142,7 +96,13 @@ def user_username(username):
             abort(404, description="Resource not found")
         return UserSchema().dump(user)
 
-    elif request.method == 'PUT':
+
+#редагування чи видалення юзера
+#http://localhost:5000/user/testuser
+@app.route('/user/<username>', methods=['PUT', 'DELETE'])
+@auth.login_required()
+def update_delete_user(username):
+    if request.method == 'PUT':
         user_data = request.args
         new_username = user_data.get('username')
         firstName = user_data.get('firstName')
@@ -176,9 +136,101 @@ def user_username(username):
         return user_schema.jsonify(user)
 
 
+#створення статті
+#http://localhost:5000/article?title=NH article&text=my first article&author_id=4
+@app.route('/article', methods=['POST'])
+@auth.login_required()
+def create_article():
+    if request.method == 'POST':
+        article_data = request.args
+        title = article_data.get('title')
+        text = article_data.get('text')
+        author_id = article_data.get('author_id')
+
+        try:
+            ArticleSchema().load(article_data)
+        except ValidationError:
+            abort(400, description="Error validation")
+
+        if not chek_moderator():
+            curr_username = auth.current_user()
+            user = User.query.filter_by(username=curr_username).first()
+            user.moderator = True
+
+        new_article = Article(title, text, author_id)
+
+        db.session.add(new_article)
+        db.session.commit()
+
+        version = UsersArticles(text, author_id, author_id, new_article.article_ID)
+
+        db.session.add(version)
+        db.session.commit()
+
+        return jsonify(ArticleSchema().dump(new_article))
+
+
+#відображення конкретної статті з конкретною айдішкою
+#http://localhost:5000/article/8
+@app.route('/article/<int:id>', methods=['GET'])
+def get_article_id(id):
+    articles = Article.query.get(id)
+    if articles is None:
+        abort(404, description="Resource not found")
+    return jsonify(ArticleSchema().dump(articles))
+
+
+#зміна та видалення статті з конкретною айдішкою
+#http://localhost:5000/article/9
+@app.route('/article/<int:ids>', methods=['PUT', 'DELETE'])
+@auth.login_required()
+def update_delete_article(ids):
+    if request.method == 'PUT':
+
+        articles = Article.query.get(ids)
+        if articles is None:
+            abort(404, description="Resource not found")
+
+        article_data = request.args
+        text = article_data.get('text')
+        user = article_data.get('editor')
+        author = articles.user_ID
+
+        if not chek_moderator() or auth.current_user() != author:
+            abort(403, description="You're not moderator")
+
+        version = UsersArticles(text, user, author, articles.article_ID)
+
+        db.session.add(version)
+        db.session.commit()
+
+        return article_schema.jsonify(articles)
+
+    elif request.method == 'DELETE':
+        articles = Article.query.get(ids)
+        author = articles.user_ID
+
+        if articles is None:
+            abort(404, description="Resource not found")
+
+        if not chek_moderator() or auth.current_user() != author:
+            abort(403, description="You're not moderator, you can't delete the article")
+
+        db.session.delete(articles)
+        db.session.commit()
+
+        all_articles = Article.query.all()
+        result = articles_schema.dump(all_articles)
+        return jsonify(result)
+
+
 @app.route('/user/moderator/<username>', methods=['GET', 'PUT'])
+@auth.login_required()
 def moderator(username):
     if request.method == 'GET':
+        if not chek_moderator():
+            abort(403, description="You're not moderator")
+
         user = User.query.filter_by(username=username).first()
         if user is None:
             abort(404, description="Resource not found")
@@ -189,7 +241,11 @@ def moderator(username):
         if user_article is None:
             abort(404, description="Resource not found")
         return jsonify(user_articles_schema.dump(user_article))
+
     elif request.method == 'PUT':
+        if not chek_moderator():
+            abort(403, description="You're not moderator")
+
         user = User.query.filter_by(username=username).first()
         if user is None:
             abort(404, description="Resource not found")
@@ -215,16 +271,8 @@ def moderator(username):
         return jsonify(article_schema.dump(article))
 
 
-@app.route('/user/login', methods=['GET'])
-def user_login():
-    return 'Hello World 5'
-
-
-@app.route('/user/logout', methods=['GET'])
-def user_logout():
-    return 'Hello World 5'
-
-
+#відображення всіх статей
+#http://localhost:5000/blog
 @app.route('/blog', methods=['GET'])
 def blog():
     if request.method == 'GET':
@@ -235,7 +283,10 @@ def blog():
         return jsonify(result)
 
 
+#відображення версій статей юзера
+#http://localhost:5000/blog/user/nh1
 @app.route('/blog/user/<username>', methods=['GET'])
+#@auth.login_required()
 def blog_username(username):
     if request.method == 'GET':
         user = User.query.filter_by(username=username).first()
@@ -249,6 +300,8 @@ def blog_username(username):
         return jsonify(result)
 
 
+#відображення версій конкретної статті
+#http://localhost:5000/blog/user/3
 @app.route('/blog/article/<int:ids>', methods=['GET'])
 def blog_article(ids):
     if request.method == 'GET':
@@ -268,3 +321,20 @@ def hello_world():
 
 server = WSGIServer(('127.0.0.1', 5000), app)
 server.serve_forever()
+
+'''#відображення всіх статей
+#http://localhost:5000/articles
+@app.route('/articles', methods=['GET'])
+def get_article():
+    all_articles = Article.query.all()
+    if all_articles is None:
+        abort(404, description="Resource not found")
+    result = articles_schema.dump(all_articles)
+    return jsonify(result)'''
+
+'''@app.errorhandler(404)
+def error_404(e):
+    return jsonify(error=str(e)), 404
+@app.errorhandler(400)
+def error_400(e):
+    return jsonify(error=str(e)), 400'''

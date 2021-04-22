@@ -33,7 +33,7 @@ class User(db.Model):
         self.lastName = lastName
         self.email = email
         self.password = password
-        self.moderator = True
+        self.moderator = False
 
 
 class Article(db.Model):
@@ -44,10 +44,10 @@ class Article(db.Model):
     text = db.Column(db.String, nullable=False)
     status = db.Column(db.String, nullable=False)
 
-    def __init__(self, title, text, author):
+    def __init__(self, title, text, user_ID):
         self.title = title
         self.text = text
-        self.user_ID = author
+        self.user_ID = user_ID
         self.status = 'complete'
 
 
@@ -58,7 +58,7 @@ class UsersArticles(db.Model):
     moderator_ID = db.Column(db.Integer, db.ForeignKey(User.user_ID))
     article_ID = db.Column(db.Integer, db.ForeignKey(Article.article_ID))
     edited_text = db.Column(db.String)
-    edited_date = db.Column(db.DateTime, default=datetime.datetime.now())  # datetime.utcnow
+    edited_date = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def __init__(self, text, user, moderator, article):
         self.edited_text = text
