@@ -1,43 +1,4 @@
-// const reqURL = new URL('http://localhost:5000/register');
-// if (document.forms[0] && window.FormData) {
-//     //var message = new Object();
-//     //message.failure = 'User is exist';
-//
-//     var form = document.forms[0];
-//     //var statusMessage = document.createElement('div');
-//     //statusMessage.className = 'status';
-//
-//     form.addEventListener('submit', function(event) {
-//         event.preventDefault();
-//         var request = new XMLHttpRequest();
-//
-//         const username = document.getElementById('username').value;
-//         const firstName = document.getElementById('fname').value;
-//         const lastName = document.getElementById('lname').value;
-//         const email = document.getElementById('email').value;
-//         const password = document.getElementById('psw').value;
-//
-//         reqURL.searchParams.append('username',username);
-//         reqURL.searchParams.append('lastName',lastName);
-//         reqURL.searchParams.append('firstName',firstName);
-//         reqURL.searchParams.append('email',email);
-//         reqURL.searchParams.append('password',password);
-//
-//
-//         request.open('POST', reqURL.toString(), true);
-//         request.setRequestHeader('Content-Type', 'application/json');
-//         request.send();
-//
-//         request.onreadystatechange = function f() {
-//             if (request.readyState === 4) {
-//                 if (request.status === 200 && request.status < 300) window.location.href = 'login.html';
-//             }
-//         };
-//    });
-//
-// }
 
-// eslint-disable-next-line no-unused-vars
 function signUp() {
     const username = document.getElementById('username').value;
     const firstName = document.getElementById('fname').value;
