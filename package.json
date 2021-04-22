@@ -1,0 +1,24 @@
+{
+  "name": "pp",
+  "version": "1.0.0",
+  "description": "**Варіант 5.** Написати сервіс статей (2000 символів). Статті є публічними для всіх, зареєстровані користувачі можуть редагувати статтю та очікувати на схвалення її модераторами (користувачі із більшими правами). Передбачити варіант редагування, коли стаття на розгляді модератором, а інший користувач її теж редагує. Модератори мають бачити статті, які очікують їх схвалення.",
+  "main": "connection_to_back.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anastasia-H/PP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anastasia-H/PP/issues"
+  },
+  "homepage": "https://github.com/Anastasia-H/PP#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0"
+  }
+}

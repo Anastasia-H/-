@@ -1,0 +1,385 @@
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Bookman Old Style", serif;
+  letter-spacing: 2px;
+}
+.clearfix {
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+.area {
+  margin: auto;
+  width: 80vw;
+}
+header {
+  nav {
+    background: #7c9473;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    ul {
+      float: right;
+      li {
+        display: inline-block;
+        line-height: 50px;
+        margin: 0 0;
+        a {
+          color: white;
+          font-size: 18px;
+          padding: 16px 15px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+a.active {
+  color: white;
+  background-color: #4f6647;
+  cursor: pointer;
+}
+a {
+  &:hover {
+    color: white;
+    background-color: #4f6647;
+    cursor: pointer;
+  }
+}
+.homebtn {
+  display: inline-block;
+  color: white;
+  font-size: 18px;
+  padding: 16px 15px;
+  text-transform: uppercase;
+}
+main {
+  top: 0;
+  margin: 50px auto 0 auto;
+  width: 80vw;
+  nav {
+    background: white;
+    height: 50px;
+    width: 100%;
+    text-align: justify;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      li {
+        display: inline-block;
+        line-height: 50px;
+        a {
+          color: black;
+          font-size: 20px;
+          padding: 16px 20px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+.logo {
+  text-align: left;
+  color: black;
+  padding: 35px 0;
+  h1 {
+    font-family: "Baskerville Old Face", serif;
+    font-size: 50px;
+  }
+  h2 {
+    margin-top: -8px;
+    font-family: "Monotype Corsiva", serif;
+    font-size: 21px;
+  }
+}
+.blackline {
+  margin: 2px 0 2px;
+  border-top: 2px solid black;
+  width: 100%;
+}
+.checkbtn {
+  display: none;
+  float: right;
+  margin: 0 0;
+  color: white;
+  padding: 16px 15px;
+  cursor: pointer;
+}
+.checkbtn-black {
+  display: none;
+  margin: 0 0;
+  text-align: center;
+  color: black;
+  padding: 16px 15px;
+  cursor: pointer;
+}
+#check {
+  display: none;
+}
+#check-genres {
+  display: none;
+}
+.main-container {
+  width: 100%;
+  margin: 30px 0;
+  .sidebar {
+    width: 20%;
+    float: right;
+    height: 300px;
+  }
+  .article-list {
+    width: 80%;
+    float: left;
+    .article {
+      width: 100%;
+      height: 270px;
+      margin: 30px auto;
+      font-size: 16px;
+      overflow: hidden;
+      color: black;
+      text-overflow: ellipsis;
+      .article-img {
+        widows: 40;
+        height: 280px;
+        float: left;
+      }
+      h1 {
+        margin: 0 0 20px;
+        a {
+          font-family: "Baskerville Old Face", serif;
+          color: black;
+          font-size: 25px;
+          font-weight: normal;
+          &:hover {
+            background: none;
+            cursor: pointer;
+          }
+        }
+      }
+      p {
+        text-align: left;
+        margin: 10px 0;
+      }
+      .article-preview {
+        width: 50%;
+        padding: 10px 20px;
+        float: left;
+      }
+      .view-article {
+        margin: 40px 0;
+        bottom: 0;
+      }
+    }
+  }
+}
+h3 {
+  font-size: 35px;
+  text-align: center;
+  font-weight: normal;
+  margin-top: 80px;
+}
+.preview-text {
+  height: 100px;
+  overflow: hidden;
+  width: 100%;
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+  }
+}
+.preview-btn {
+  padding: .5rem 1rem;
+  background: #7c9473;
+  color: white;
+  margin: 30px 0;
+}
+.text-about-us {
+  font-size: 20px;
+  padding: 10px 0;
+  margin: 20px 0;
+  h1 {
+    text-transform: uppercase;
+    font-size: 35px;
+    font-weight: normal;
+    margin: 40px 0 20px;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .logo {
+    h1 {
+      font-size: 40px;
+    }
+    h2 {
+      font-size: 16px;
+    }
+  }
+  main {
+    nav {
+      ul {
+        li {
+          a {
+            font-size: 16px;
+            padding: 18.5px 5px 18px;
+          }
+        }
+      }
+    }
+  }
+  .main-container {
+    .article-list {
+      .article {
+        .article-img {
+          height: 230px;
+        }
+        h1 {
+          a {
+            font-size: 20px;
+          }
+        }
+        font-size: 14px;
+      }
+      width: 100%;
+    }
+    .sidebar {
+      width: 0;
+      height: 0;
+    }
+  }
+  .preview-text {
+    height: 85px;
+  }
+  .text-about-us {
+    font-size: 20px;
+    h1 {
+      font-size: 32px;
+    }
+  }
+}
+@media screen and (max-width: 730px) {
+  .checkbtn {
+    display: block;
+  }
+  .checkbtn-black {
+    display: block;
+  }
+  .logo {
+    h1 {
+      font-size: 35px;
+    }
+    h2 {
+      font-size: 13.5px;
+    }
+  }
+  h3 {
+    font-size: 30px;
+  }
+  header {
+    nav {
+      ul {
+        display: none;
+        position: fixed;
+        width: 100%;
+        background: #7c9473;
+        text-align: center;
+        left: 0;
+        li {
+          display: block;
+          margin: 10px 0;
+          line-height: 50px;
+          a {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  main {
+    nav {
+      ul {
+        display: none;
+        position: relative;
+        width: 100%;
+        background: white;
+        li {
+          display: none;
+          text-align: center;
+          margin: 0 auto 20px;
+          line-height: 50px;
+          a {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  #check {
+    &:checked {
+      ~ {
+        ul {
+          display: block;
+          li {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  #check-genres {
+    &:checked {
+      ~ {
+        ul {
+          display: block;
+          li {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .main-container {
+    .article-list {
+      .article {
+        height: 110%;
+        width: 100%;
+        margin: 0 auto;
+        .article-img {
+          margin: 20px;
+          height: 30vh;
+          justify-content: center;
+        }
+        .article-preview {
+          width: 100%;
+          h1 {
+            width: 100%;
+            float: left;
+          }
+          p {
+            width: 100%;
+            float: left;
+          }
+        }
+      }
+      width: 100%;
+    }
+  }
+  .text-about-us {
+    font-size: 16px;
+    h1 {
+      font-size: 25px;
+    }
+  }
+}

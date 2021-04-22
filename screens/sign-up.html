@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Narrator</title>
+    <link rel="stylesheet" href="form_styles.css">
+    <script src="../connection_to_back.js"></script>
+</head>
+<body>
+<script src="../connection_to_back.js"></script>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>NARRATOR</h1>
+                <h2>Articles, Stories & Inspiration</h2>
+            </div>
+            <a href="#" onclick="history.back();return false;">GO BACK</a>
+            <h3>Create an account</h3>
+        </div>
+    </header>
+
+
+    <main>
+
+    <!--        <div class="main-container">-->
+            <input type="text" class="font" placeholder="First name" name="fname" id="fname" required>
+            <input type="text" class="font" placeholder="Last name" name="lname" id="lname" required>
+            <input type="text" class="font" placeholder="Username" name="username" id="username" required>
+            <input type="email" class="font" placeholder="Email" name="email" id="email" required>
+            <input type="password" class="font" placeholder="Password" name="psw" id="psw" required>
+
+        <div class="inline">
+            <p>Already have an account?</p>
+            <a href="sign-in.html">Sign in</a>
+        </div>
+        <button type="submit" class="font" onclick=signUp()>Sign Up</button>
+
+
+    <!--    </main>-->
+    </main>
+
+
+
+</body>
+</html>

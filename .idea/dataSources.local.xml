@@ -14,6 +14,10 @@
       </schema-mapping>
     </data-source>
     <data-source name="database [2]" uuid="9ebedc8b-8cf5-441d-8ac7-32866e53e689">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
+      <schema-mapping />
+    </data-source>
+    <data-source name="database [3]" uuid="dfe51471-24bc-44cc-9dbb-b97be0b0adb8">
       <database-info product="SQLite" version="3.31.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.31.1" dbms="SQLITE" exact-version="3.31.1" exact-driver-version="3.31">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>

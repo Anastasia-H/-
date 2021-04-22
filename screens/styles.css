@@ -1,0 +1,302 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Bookman Old Style", serif;
+    letter-spacing: 2px;
+}
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.area{
+    margin: auto;
+    width: 80vw;
+}
+header nav{
+    background: #7c9473;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+}
+header nav ul{
+    float: right;
+}
+header nav ul li{
+    display: inline-block;
+    line-height: 50px;
+    margin: 0 0;
+}
+header nav ul li a{
+    color: white;
+    font-size: 18px;
+    padding: 16px 15px;
+    text-transform: uppercase;
+}
+a.active, a:hover{
+    color: white;
+    background-color: #4f6647;
+    cursor: pointer;
+}
+.homebtn{
+    display: inline-block;
+    color: white;
+    font-size: 18px;
+    padding: 16px 15px;
+    text-transform: uppercase;
+}
+main{
+    top: 0;
+    margin: 50px auto 0 auto;
+    width: 80vw;
+}
+.logo {
+    text-align: left;
+    color: black;
+    padding: 35px 0;
+}
+.logo h1{
+    font-family: "Baskerville Old Face", serif;
+    font-size: 50px;
+}
+.logo h2{
+    margin-top: -8px;
+    font-family: "Monotype Corsiva", serif;
+    font-size: 21px;
+}
+.blackline {
+    margin: 2px 0 2px;
+    border-top: 2px solid black;
+    width: 100%;
+}
+main nav{
+    background: white;
+    height: 50px;
+    width: 100%;
+    text-align: justify;
+    /*overflow: hidden;*/
+}
+main nav ul{
+    display: flex;
+    justify-content: space-between;
+
+}
+main nav ul li{
+
+    display: inline-block;
+    line-height: 50px;
+}
+main nav ul li a{
+    color: black;
+    font-size: 20px;
+    padding: 16px 20px;
+    text-transform: uppercase;
+}
+.checkbtn {
+    display: none;
+    float: right;
+    margin: 0 0;
+    color: white;
+    padding: 16px 15px;
+    cursor: pointer;
+}
+.checkbtn-black {
+    display: none;
+    margin: 0 0;
+    text-align: center;
+    color: black;
+    padding: 16px 15px;
+    cursor: pointer;
+}
+#check{
+    display: none;
+}
+#check-genres{
+    display: none;
+}
+.main-container{
+    width: 100%;
+    margin: 30px 0;
+}
+.main-container .sidebar{
+    width: 20%;
+    float: right;
+    height: 300px;
+}
+.main-container .article-list{
+    width: 80%;
+    float: left;
+}
+h3{
+    font-size: 35px;
+    text-align: center;
+    font-weight: normal;
+    margin-top: 80px;
+}
+.main-container .article-list .article{
+    width: 100%;
+    height: 270px;
+    margin: 30px auto;
+    font-size: 16px;
+    overflow: hidden;
+    color: black;
+    text-overflow: ellipsis;
+}
+.main-container .article-list .article .article-img{
+    widows: 40;
+    height: 280px;
+    float: left;
+}
+.main-container .article-list .article h1{
+    margin: 0 0 20px;
+}
+.main-container .article-list .article p{
+    text-align: left;
+    margin: 10px 0;
+}
+.main-container .article-list .article h1 a{
+    font-family: "Baskerville Old Face", serif;
+    color: black;
+    font-size: 25px;
+    font-weight:normal;
+}
+.main-container .article-list .article h1 a:hover{
+    background: none;
+    cursor: pointer;
+}
+.main-container .article-list .article .article-preview{
+    width: 50%;
+    padding: 10px 20px;
+    float: left;
+}
+.preview-text{
+    /*white-space: nowrap;*/
+    height: 100px;
+    overflow: hidden;
+    width: 100%;
+    /*position: relative;*/
+    /*text-overflow: ellipsis;*/
+}
+.preview-text:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    /*background: linear-gradient(180deg, transparent, white 50%);*/
+}
+.preview-btn{
+    padding: .5rem 1rem;
+    background: #7c9473;
+    color: white;
+    margin: 30px 0;
+}
+.main-container .article-list .article .view-article{
+    margin: 40px 0;
+    bottom: 0;
+}
+.text-about-us{
+    font-size: 20px;
+    padding: 10px 0;
+    margin: 20px 0;
+}
+.text-about-us h1{
+    text-transform: uppercase;
+    font-size: 35px;
+    font-weight:normal;
+    margin: 40px 0 20px;
+}
+@media screen and (max-width: 1080px){
+    .logo h1{
+        font-size: 40px;}
+    .logo h2{
+        font-size: 16px;}
+    main nav ul li a{
+        font-size: 16px;
+        padding: 18.5px 5px 18px;}
+    .main-container .article-list .article .article-img{
+        height: 230px;}
+    .preview-text{
+        height: 85px;}
+    .main-container .article-list{
+        width: 100%;}
+    .main-container .sidebar{
+        width: 0;
+        height: 0;}
+    .main-container .article-list .article h1 a{
+        font-size: 20px;}
+    .main-container .article-list .article{
+        font-size: 14px;}
+    .text-about-us{
+        font-size: 20px;}
+    .text-about-us h1{
+        font-size: 32px;}
+}
+@media screen and (max-width: 730px) {
+    .checkbtn, .checkbtn-black {
+        display: block;}
+    .logo h1{
+        font-size: 35px;}
+    .logo h2{
+        font-size: 13.5px;}
+    h3{
+        font-size: 30px;
+    }
+    header nav ul {
+        display: none;
+        position: fixed;
+        width: 100%;
+        background: #7c9473;
+        text-align: center;
+        left: 0;}
+    header nav ul li{
+        display: block;
+        margin: 10px 0;
+        line-height: 50px;}
+    header nav ul li a{
+        font-size: 16px;}
+    main nav ul{
+        display: none;
+        position: relative;
+        width: 100%;
+        background: white;}
+    main nav ul li{
+        display: none;
+        text-align: center;
+        margin: 0 auto 20px;
+        line-height: 50px;}
+    main nav ul li a{
+        font-size: 16px;}
+    #check:checked ~ ul, #check:checked ~ ul li{
+        display: block;}
+    #check-genres:checked ~ ul, #check-genres:checked ~ ul li{
+        display: block;}
+    .main-container .article-list .article{
+        height: 110%;
+        width: 100%;
+        margin: 0 auto;}
+    .main-container .article-list .article .article-img{
+        margin: 20px;
+        height: 30vh;
+        justify-content: center;
+        /*width: 90vh;*/}
+    .main-container .article-list{
+        width: 100%;}
+    .main-container .article-list .article .article-preview{
+        width: 100%;}
+    .main-container .article-list .article .article-preview h1, .main-container .article-list .article .article-preview p{
+        width: 100%;
+        float: left;}
+    .text-about-us{
+        font-size: 16px;}
+    .text-about-us h1{
+        font-size: 25px;}
+}

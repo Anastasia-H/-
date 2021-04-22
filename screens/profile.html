@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Narrator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="profile_page.css">
+</head>
+<body>
+<header>
+    <nav>
+        <div class="area">
+            <a href="home.html" class="homebtn">Home</a>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fa fa-bars"></i>
+            </label>
+            <ul>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="profile.html" class="active">Profile</a></li>
+                <!--            <li><a href="sign-up.html">Sign Up</a></li>-->
+                <li><a href="sign-in.html">Sign In</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="logo">
+        <h1>NARRATOR</h1>
+        <h2>Articles, Stories & Inspiration</h2>
+    </div>
+    <div class="blackline"></div>
+    <div class="block_avatar_info">
+        <img src="img3.jpg" class="avatar"/>
+        <div class="info">
+            <div class="info_name">Ivan Ivanov</div>
+            <div class="info_text">Username: ivanov</div>
+            <div class="info_text">Email: ivanov@gmail.com</div>
+        </div>
+    </div>
+    <div class="blackline"></div>
+    <div class="main_body_title">
+        <div class="title_profile">My articles</div>
+        <button class="button" onclick="location.href='create-article.html'">Create article</button>
+    </div>
+    <div class="main-container clearfix">
+        <div class="article-list">
+            <div class="article">
+                <img src="img2.JPG" class="article-img">
+                <div class="article-preview">
+                    <h1><a href="article.html">Article #2</a></h1>
+                    <p>Author: Bill Clinton, Published: Yesterday</p>
+                    <p class="preview-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <a href="article.html" class="preview-btn view-article">View article</a>
+                </div>
+            </div>
+            <div class="blackline"></div>
+        </div>
+    </div>
+</main>
+<footer></footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Narrator</title>
+    <link rel="stylesheet" href="form_styles.css">
+</head>
+<body>
+<script src="../connection_to_back.js"></script>
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <h1>NARRATOR</h1>
+            <h2>Articles, Stories & Inspiration</h2>
+        </div>
+        <a href="#" onclick="history.back();return false;">GO BACK</a>
+        <h3>Sign in</h3>
+    </div>
+</header>
+<main>
+    <input type="text" class="font" placeholder="Username" name="email" id="email" required>
+    <input type="password" class="font" placeholder="Password" name="psw" id="psw" required>
+    <div class="inline">
+        <p>Don't have an account?</p>
+        <a href="sign-up.html">Sign up</a>
+    </div>
+    <button type="submit" class="font" onclick=signIn()>Continue</button>
+</main>
+</body>
+</html>

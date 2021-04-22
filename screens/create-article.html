@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Narrator</title>
+    <link rel="stylesheet" href="form_styles.css">
+</head>
+<body>
+<script src="../connection_to_back.js"></script>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>NARRATOR</h1>
+                <h2>Articles, Stories & Inspiration</h2>
+            </div>
+            <a href="#" onclick="history.back();return false;">GO BACK</a>
+            <h3>Create an article</h3>
+        </div>
+    </header>
+    <main>
+        <!--        <div class="main-container">-->
+        <input type="text" class="font" placeholder="Title" name="title" id="title" required>
+        <input type="text" class="font" placeholder="Text" name="text" id="text" required>
+        <div class="inline">
+        <button type="submit" class="font" onclick=createArticle()>Create article</button>
+
+    </main>
+</body>
+</html>
